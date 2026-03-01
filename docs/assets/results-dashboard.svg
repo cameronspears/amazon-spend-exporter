@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f1f5ef"/>
+  <rect x="70" y="70" width="1060" height="560" rx="22" fill="#fff" stroke="#cfdbd1"/>
+  <text x="120" y="150" font-family="Space Grotesk, sans-serif" font-size="42" fill="#1b3325">Results + Spend Insights</text>
+  <rect x="120" y="200" width="220" height="120" rx="14" fill="#eef7ff" stroke="#cfe0f5"/>
+  <rect x="360" y="200" width="220" height="120" rx="14" fill="#eef7ff" stroke="#cfe0f5"/>
+  <rect x="600" y="200" width="220" height="120" rx="14" fill="#eef7ff" stroke="#cfe0f5"/>
+  <rect x="120" y="350" width="700" height="220" rx="14" fill="#f9fbfc" stroke="#d6e0e7"/>
+  <rect x="160" y="510" width="90" height="20" rx="8" fill="#4cb574"/>
+  <rect x="270" y="485" width="140" height="20" rx="8" fill="#4cb574"/>
+  <rect x="430" y="460" width="180" height="20" rx="8" fill="#4cb574"/>
+  <rect x="630" y="435" width="150" height="20" rx="8" fill="#4cb574"/>
+  <rect x="860" y="350" width="230" height="220" rx="14" fill="#fff8eb" stroke="#f0d49b"/>
+  <text x="880" y="390" font-family="Space Grotesk, sans-serif" font-size="20" fill="#6b4f17">Top Items</text>
+</svg>

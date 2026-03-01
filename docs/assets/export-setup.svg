@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ebf8ef"/>
+      <stop offset="100%" stop-color="#f8efe0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="540" rx="22" fill="#fff" stroke="#cfd9df"/>
+  <text x="120" y="150" font-family="Space Grotesk, sans-serif" font-size="42" fill="#1b2f39">Export Setup</text>
+  <text x="120" y="200" font-family="Space Grotesk, sans-serif" font-size="24" fill="#4a5c67">Configure dates, output format, and launch manual auth run.</text>
+  <rect x="120" y="250" width="300" height="56" rx="10" fill="#f4f7fa" stroke="#d6e0e7"/>
+  <rect x="460" y="250" width="300" height="56" rx="10" fill="#f4f7fa" stroke="#d6e0e7"/>
+  <rect x="120" y="330" width="640" height="56" rx="10" fill="#f4f7fa" stroke="#d6e0e7"/>
+  <rect x="120" y="430" width="280" height="62" rx="12" fill="#0f5ab6"/>
+  <text x="260" y="470" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="24" fill="#fff">Open Browser and Export</text>
+</svg>
