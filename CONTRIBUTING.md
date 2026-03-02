@@ -10,7 +10,7 @@ npm test
 
 ## Running locally
 - CLI: `npm run dev -- export --from 2025-01-01 --to 2025-12-31 --out ./exports`
-- Web app: `npm run app`
+- Web app: `npm start`
 
 ## Pull requests
 - Keep changes scoped and documented.

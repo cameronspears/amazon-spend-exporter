@@ -8,7 +8,7 @@ npm test
 ```
 
 ## Manual acceptance
-1. Run `npm run app`.
+1. Run `npm start`.
 2. Export at least one month from a real account.
 3. Confirm CSV/XLSX open in Excel.
 4. Confirm results dashboard metrics are sane.
@@ -16,18 +16,18 @@ npm test
 ## Create release commit
 ```bash
 git add .
-git commit -m "Release v0.1.0"
+git commit -m "Release v0.2.0"
 ```
 
 ## Tag
 ```bash
-git tag v0.1.0
+git tag v0.2.0
 ```
 
 ## Push
 ```bash
 git push origin main
-git push origin v0.1.0
+git push origin v0.2.0
 ```
 
 ## GitHub release notes

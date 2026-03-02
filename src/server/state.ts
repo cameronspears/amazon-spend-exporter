@@ -3,6 +3,7 @@ import { Response } from "express";
 import { CliExportOptions } from "../config";
 import { runExportJob } from "../core/run-export";
 import { aggregateInsights } from "../insights/aggregate";
+import { daysBetweenInclusive } from "../normalize/date";
 import { ExportEvent, ExportProgress, ExportRunStatus, InsightsPayload } from "../types";
 
 interface SseClient {
@@ -13,13 +14,11 @@ interface SseClient {
 export interface StartExportRequest {
   from: string;
   to: string;
-  outDir: string;
+  outDir?: string;
   format?: string;
-  headless?: boolean | string;
-  maxOrders?: number | string;
   maxRangeDays?: number | string;
   loginTimeoutSeconds?: number | string;
-  debug?: boolean;
+  debug?: boolean | string;
 }
 
 export interface ExportRunRecord {
@@ -45,15 +44,28 @@ function nowIso(): string {
   return new Date().toISOString();
 }
 
+function deriveMaxRangeDays(from: string, to: string, explicit?: number | string): number | string | undefined {
+  if (explicit !== undefined && explicit !== null && explicit !== "") {
+    return explicit;
+  }
+
+  const days = daysBetweenInclusive(from, to);
+  if (!Number.isFinite(days) || days <= 0) {
+    return undefined;
+  }
+
+  return days;
+}
+
 function toCliOptions(input: StartExportRequest): CliExportOptions {
+  const outDir = input.outDir && input.outDir.trim().length > 0 ? input.outDir : "./exports";
   return {
     from: input.from,
     to: input.to,
-    out: input.outDir,
+    out: outDir,
     format: input.format,
-    headless: input.headless ?? false,
-    maxOrders: input.maxOrders,
-    maxRangeDays: input.maxRangeDays,
+    headless: false,
+    maxRangeDays: deriveMaxRangeDays(input.from, input.to, input.maxRangeDays),
     loginTimeoutSeconds: input.loginTimeoutSeconds,
     debug: Boolean(input.debug)
   };

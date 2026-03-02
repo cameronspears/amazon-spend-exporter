@@ -43,10 +43,8 @@ function parseRequestBody(request: Request): StartExportRequest {
   return {
     from: String(body.from ?? ""),
     to: String(body.to ?? ""),
-    outDir: String(body.outDir ?? ""),
-    format: body.format,
-    headless: body.headless,
-    maxOrders: body.maxOrders,
+    outDir: body.outDir ? String(body.outDir) : "./exports",
+    format: body.format ?? "both",
     maxRangeDays: body.maxRangeDays,
     loginTimeoutSeconds: body.loginTimeoutSeconds,
     debug: Boolean(body.debug)
@@ -54,8 +52,8 @@ function parseRequestBody(request: Request): StartExportRequest {
 }
 
 function validateStartExportRequest(body: StartExportRequest): string | null {
-  if (!body.from || !body.to || !body.outDir) {
-    return "from, to, and outDir are required.";
+  if (!body.from || !body.to) {
+    return "from and to are required.";
   }
   return null;
 }

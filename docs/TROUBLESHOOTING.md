@@ -1,33 +1,40 @@
 # Troubleshooting
 
-## Browser opens then run stalls
-- Confirm you completed login/2FA in the opened Amazon window.
-- Keep the browser open for the full run.
-- Check the live status stage (`awaiting_auth`, `collecting_orders`, etc.).
+## I clicked Start Export and nothing seems to happen
+- Keep the Amazon browser window open.
+- Complete login/2FA/CAPTCHA in that window.
+- The run continues automatically after auth is complete.
 
-## Completed with warnings
-- Download `*.warnings.log` from Results.
-- Common causes: DOM variants, unavailable detail pages, or non-purchasable entries.
-- Re-run with `--debug` to capture detail HTML snapshots.
+## Browser opens and then closes
+- Usually the session timed out or auth did not complete.
+- Start a new run and finish login before returning to the app.
 
-## Missing historical orders
-- Ensure `--from` includes the year range you expect.
-- Verify Amazon UI totals by year and compare with run event logs.
+## Export finished but some orders are missing
+- Verify your date range includes those orders.
+- Compare yearly totals in Amazon Orders UI to the export output.
+- Download warnings log for details if run completed with warnings.
 
-## Build/start issues
+## Dashboard looks incomplete for item-level spend
+- Some Amazon pages do not expose per-item prices.
+- Total spend and order-level stats still use reliable order totals when available.
+
+## App won’t start
+Run:
+
 ```bash
 npm install
 npm run build
-npm run app
+npm start
 ```
 
-## Playwright missing browser
+## Playwright browser missing
+
 ```bash
 npx playwright install chromium
 ```
 
-## Port conflict
-Set a different port:
+## Port 4173 already in use
+
 ```bash
-PORT=4180 npm run app
+PORT=4180 npm start
 ```

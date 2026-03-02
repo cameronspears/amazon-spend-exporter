@@ -1,19 +1,28 @@
 # FAQ
 
-## Does this use an official Amazon API?
-No. It uses user-driven browser automation against Amazon's order pages.
+## Is this an official Amazon app/API?
+No. It uses local browser automation that you control.
 
-## Does this bypass CAPTCHA or checkpoints?
-No. The run pauses and waits for manual user action.
+## Does this bypass CAPTCHA or security checks?
+No. You complete login, 2FA, and CAPTCHA manually.
 
-## Does it support marketplaces outside amazon.com?
-Not in v0.1.0.
+## Are my credentials stored?
+No. Credentials are never stored by this app.
 
-## Why do I sometimes see warnings?
-Amazon order/detail page variants can differ by order type and age. Warnings provide diagnostics and partial-run transparency.
+## Where does my data go?
+Exports stay on your computer. There is no cloud sync.
 
-## Can I run this headless?
-Yes (`headless: true`), but headed mode is recommended for manual auth/checkpoint handling.
+## Can I use this for business expense review?
+Yes. Many users run it for year-end spending review and business purchase visibility.
+
+## Why can item-level spend be missing on some rows?
+Amazon does not always expose item-level pricing on every order detail page. The app prioritizes order totals for reliable overall spend.
+
+## Which marketplace is supported?
+`amazon.com` only (v0.2.0).
 
 ## Are digital orders included?
-No. v0.1.0 targets physical retail orders.
+No. Focus is physical retail orders.
+
+## Can I run headless mode from CLI?
+Yes, but headed mode is recommended for login/CAPTCHA workflows.

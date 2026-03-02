@@ -1,32 +1,46 @@
 # Quickstart
 
-## Requirements
-- Node.js >= 20
-- npm
+This guide is for non-technical users.
 
-## Setup
+## 1. Install once
+You need Node.js 20+ and npm installed.
+
+Run:
+
 ```bash
 npm install
 npx playwright install chromium
 ```
 
-## Launch app
+## 2. Start the app
+
 ```bash
-npm run app
+npm start
 ```
 
 Open: `http://localhost:4173`
 
-## Run first export
-1. Go to **Export**.
-2. Set date range and output directory.
-3. Click **Open Browser and Export**.
-4. Complete Amazon login/2FA/CAPTCHA manually in the opened browser.
-5. Wait for run completion and open **Results**.
-6. Download CSV/XLSX.
+## 3. Run your first export
+1. Click **Start**.
+2. Choose a date range.
+3. Click **Start Export**.
+4. In the opened browser, sign in to Amazon and complete any CAPTCHA/2FA.
+5. Wait for completion.
+6. Open **Results** to:
+   - download CSV/XLSX
+   - review spending insights
 
-## CLI fallback
+## 4. If the app cannot start
+Try:
+
 ```bash
+npm install
 npm run build
-node dist/cli.js export --from 2025-01-01 --to 2025-12-31 --out ./exports --format both --headless false
+npm start
+```
+
+If port `4173` is busy:
+
+```bash
+PORT=4180 npm start
 ```

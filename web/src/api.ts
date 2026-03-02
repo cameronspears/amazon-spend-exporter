@@ -3,12 +3,14 @@ import { CreateExportRequest, ExportRun, InsightsPayload } from "./types";
 async function parseJson<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const fallback = `Request failed with ${response.status}`;
+    let parsedError: string | null = null;
     try {
       const payload = (await response.json()) as { error?: string };
-      throw new Error(payload.error ?? fallback);
+      parsedError = payload.error ?? null;
     } catch {
-      throw new Error(fallback);
+      // Ignore non-json responses.
     }
+    throw new Error(parsedError ?? fallback);
   }
 
   return (await response.json()) as T;

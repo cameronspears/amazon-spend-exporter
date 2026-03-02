@@ -1,4 +1,4 @@
-# Limitations (v0.1.0)
+# Limitations (v0.2.0)
 
 - Marketplace locked to `amazon.com`
 - Physical retail orders only

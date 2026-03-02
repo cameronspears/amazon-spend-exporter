@@ -4,7 +4,7 @@ export function LandingPage(): JSX.Element {
   return (
     <main className="page page-landing">
       <section className="hero-card reveal">
-        <p className="eyebrow">Amazon Orders Local Exporter</p>
+        <p className="eyebrow">Amazon Spend Exporter</p>
         <h1>Clear spending insights from your own Amazon history.</h1>
         <p>
           Export item-level CSV/XLSX reports and view spend trends year-over-year without sharing your account
@@ -12,7 +12,7 @@ export function LandingPage(): JSX.Element {
         </p>
         <div className="hero-actions">
           <Link to="/export" className="button button-primary">
-            Start Export
+            Start
           </Link>
           <Link to="/results/demo" className="button button-ghost">
             View UX Preview

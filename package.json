@@ -1,15 +1,17 @@
 {
-  "name": "amazon-orders",
-  "version": "0.1.0",
-  "description": "Local CLI to export Amazon.com order history to CSV/XLSX",
+  "name": "amazon-spend-exporter",
+  "version": "0.2.0",
+  "description": "Local web app to export Amazon.com order history and view spend insights",
   "license": "MIT",
   "bin": {
-    "amazon-orders": "dist/cli.js"
+    "amazon-orders": "dist/cli.js",
+    "amazon-spend-exporter": "dist/cli.js"
   },
   "scripts": {
     "build": "npm run build:core && npm run web:build",
     "build:core": "tsc -p tsconfig.json",
     "dev": "tsx src/cli.ts",
+    "start": "npm run app",
     "app": "npm run build && node dist/server/index.js",
     "app:dev": "tsx src/server/index.ts",
     "web:build": "vite build --config web/vite.config.ts",
@@ -31,11 +33,14 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/express": "^4.17.23",
     "@types/node": "^24.3.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.4.1",
+    "jsdom": "^28.1.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vite": "^5.4.10",

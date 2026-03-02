@@ -17,24 +17,20 @@ export function ExportPage(): JSX.Element {
   const navigate = useNavigate();
   const [from, setFrom] = useState(firstDayTwoYearsAgo);
   const [to, setTo] = useState(todayIso);
-  const [outDir, setOutDir] = useState("./exports");
   const [format, setFormat] = useState<ExportFormat>("both");
-  const [headless, setHeadless] = useState(false);
-  const [maxOrders, setMaxOrders] = useState("5000");
-  const [debug, setDebug] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const hasBasicValidationError = useMemo(() => {
-    return !from || !to || !outDir || from > to;
-  }, [from, to, outDir]);
+    return !from || !to || from > to;
+  }, [from, to]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     setError(null);
 
     if (hasBasicValidationError) {
-      setError("Please provide a valid date range and output directory.");
+      setError("Choose a valid date range before starting.");
       return;
     }
 
@@ -43,11 +39,9 @@ export function ExportPage(): JSX.Element {
       const response = await createExportRun({
         from,
         to,
-        outDir,
         format,
-        headless,
-        maxOrders: Number(maxOrders),
-        debug
+        outDir: "./exports",
+        debug: false
       });
       navigate(`/run/${encodeURIComponent(response.runId)}`);
     } catch (submitError) {
@@ -60,10 +54,26 @@ export function ExportPage(): JSX.Element {
   return (
     <main className="page">
       <section className="panel reveal">
-        <h1>Start Export</h1>
+        <h1>Start</h1>
         <p>
-          Configure your range and output format. When the run starts, a browser opens for manual Amazon login.
+          Pick your date range, click <strong>Start Export</strong>, then complete Amazon login in the browser
+          window that opens.
         </p>
+
+        <div className="step-grid">
+          <article className="step-card">
+            <h2>Step 1</h2>
+            <p>Select dates for the report window.</p>
+          </article>
+          <article className="step-card">
+            <h2>Step 2</h2>
+            <p>Click Start Export to open Amazon auth.</p>
+          </article>
+          <article className="step-card">
+            <h2>Step 3</h2>
+            <p>Finish login/CAPTCHA in browser. The run continues automatically.</p>
+          </article>
+        </div>
 
         <form className="form-grid" onSubmit={onSubmit}>
           <label>
@@ -77,44 +87,19 @@ export function ExportPage(): JSX.Element {
           </label>
 
           <label className="field-wide">
-            <span>Output Directory</span>
-            <input value={outDir} onChange={(event) => setOutDir(event.target.value)} required />
-          </label>
-
-          <label>
-            <span>Format</span>
+            <span>File format</span>
             <select value={format} onChange={(event) => setFormat(event.target.value as ExportFormat)}>
-              <option value="both">CSV + XLSX</option>
-              <option value="csv">CSV</option>
-              <option value="xlsx">XLSX</option>
+              <option value="both">CSV + XLSX (recommended)</option>
+              <option value="csv">CSV only</option>
+              <option value="xlsx">XLSX only</option>
             </select>
           </label>
 
-          <label>
-            <span>Max Orders</span>
-            <input
-              type="number"
-              min={1}
-              value={maxOrders}
-              onChange={(event) => setMaxOrders(event.target.value)}
-            />
-          </label>
-
-          <label className="toggle">
-            <input type="checkbox" checked={headless} onChange={(event) => setHeadless(event.target.checked)} />
-            <span>Run headless browser</span>
-          </label>
-
-          <label className="toggle">
-            <input type="checkbox" checked={debug} onChange={(event) => setDebug(event.target.checked)} />
-            <span>Write debug snapshots for parser issues</span>
-          </label>
-
-          {error ? <p className="error-text">{error}</p> : null}
+          {error ? <p className="error-text field-wide">{error}</p> : null}
 
           <div className="actions-row field-wide">
             <button className="button button-primary" type="submit" disabled={isSubmitting || hasBasicValidationError}>
-              {isSubmitting ? "Starting..." : "Open Browser and Export"}
+              {isSubmitting ? "Starting..." : "Start Export"}
             </button>
           </div>
         </form>
