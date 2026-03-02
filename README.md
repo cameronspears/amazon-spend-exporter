@@ -60,9 +60,9 @@ Read more: [docs/PRIVACY-SECURITY.md](./docs/PRIVACY-SECURITY.md)
 - [Limitations](./docs/LIMITATIONS.md)
 
 ## Screenshots
-- Export setup: ![Export setup](./docs/assets/export-setup.svg)
-- Auth wait + progress: ![Auth wait](./docs/assets/auth-wait.svg)
-- Results dashboard: ![Results dashboard](./docs/assets/results-dashboard.svg)
+- Export setup: ![Export setup](./docs/assets/export-setup.png)
+- Auth wait + progress: ![Auth wait](./docs/assets/auth-wait.png)
+- Results dashboard: ![Results dashboard](./docs/assets/results-dashboard.png)
 
 ## Advanced (developers)
 CLI and local API are still available.

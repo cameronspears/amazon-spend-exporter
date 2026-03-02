@@ -10,7 +10,7 @@ export function App(): JSX.Element {
       <header className="site-header">
         <Link to="/" className="brand-mark">
           <span className="brand-dot" />
-          <span>Amazon Orders Local Exporter</span>
+          <span>Amazon Spend Exporter</span>
         </Link>
         <nav>
           <Link to="/export">Export</Link>

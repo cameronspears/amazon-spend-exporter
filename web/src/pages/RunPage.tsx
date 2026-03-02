@@ -6,6 +6,45 @@ import { ExportEvent, ExportRun, ExportRunStatus } from "../types";
 
 const FINAL_STATUSES: ExportRunStatus[] = ["completed", "completed_with_warnings", "failed", "cancelled"];
 
+const DEMO_RUN: ExportRun = {
+  runId: "demo",
+  status: "awaiting_auth",
+  queued: false,
+  progress: {
+    stage: "awaiting_auth",
+    percent: 8,
+    ordersTotal: 0,
+    ordersProcessed: 0,
+    itemsExtracted: 0,
+    warningsCount: 0
+  },
+  counts: {
+    ordersTotal: 0,
+    ordersProcessed: 0,
+    itemsExtracted: 0
+  },
+  warningsCount: 0,
+  files: [],
+  warningFile: null,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString()
+};
+
+const DEMO_EVENTS: ExportEvent[] = [
+  {
+    ts: new Date(Date.now() - 180000).toISOString(),
+    stage: "awaiting_auth",
+    message: "Browser window opened. Waiting for manual Amazon login",
+    progress: 5
+  },
+  {
+    ts: new Date(Date.now() - 120000).toISOString(),
+    stage: "awaiting_auth",
+    message: "Waiting for 2FA and CAPTCHA completion",
+    progress: 8
+  }
+];
+
 function formatEventMessage(event: ExportEvent): string {
   return event.message.replace(/_/g, " ");
 }
@@ -36,11 +75,16 @@ function nextStep(status: ExportRunStatus): string {
 
 export function RunPage(): JSX.Element {
   const { runId = "" } = useParams();
-  const [run, setRun] = useState<ExportRun | null>(null);
-  const [events, setEvents] = useState<ExportEvent[]>([]);
+  const isDemo = runId === "demo";
+  const [run, setRun] = useState<ExportRun | null>(isDemo ? DEMO_RUN : null);
+  const [events, setEvents] = useState<ExportEvent[]>(isDemo ? DEMO_EVENTS : []);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (isDemo) {
+      return;
+    }
+
     let isMounted = true;
     let interval: number | null = null;
 
@@ -71,9 +115,13 @@ export function RunPage(): JSX.Element {
         window.clearInterval(interval);
       }
     };
-  }, [runId]);
+  }, [isDemo, runId]);
 
   useEffect(() => {
+    if (isDemo) {
+      return;
+    }
+
     if (!runId) {
       return;
     }
@@ -102,7 +150,7 @@ export function RunPage(): JSX.Element {
     return () => {
       source.close();
     };
-  }, [runId]);
+  }, [isDemo, runId]);
 
   const percent = run?.progress.percent ?? 0;
   const isDone = run ? FINAL_STATUSES.includes(run.status) : false;
